@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:m2i_cours_flutter/widgets/custom_text.dart';
 
 class CustomButton extends StatefulWidget {
-  Function event;
-  CustomButton({
+  final Function event;
+
+  const CustomButton({
     super.key,
     required this.event,
   });
