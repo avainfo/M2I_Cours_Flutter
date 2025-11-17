@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:m2i_cours_flutter/pages/home_page.dart';
+import 'package:m2i_cours_flutter/pages/second_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: HomePage(),
+      home: SecondPage(),
     );
   }
 }
