@@ -16,16 +16,13 @@ class _CounterWidgetState extends State<CounterWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomText(text: "Counter : $counter"),
-        CustomButton(),
-        ElevatedButton(
-          onPressed: () {
+        Text("Counter : $counter"),
+        CustomButton(
+          event: () {
             setState(() {
               counter++;
             });
-            print(counter);
           },
-          child: CustomText(text: "Incrémenter le counter"),
         ),
       ],
     );

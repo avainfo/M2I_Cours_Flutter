@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             Image.network("https://media.istockphoto.com/id/1399246824/fr/photo/digital-eye-wave-lines-stock-background.jpg?s=612x612&w=0&k=20&c=vzYCTiu1RWxQdqBl1lzKUaDs1oW-zzNQI7kiAVrd4xI="),
+            Image.asset("assets/tortue.png"),
             CounterWidget(),
           ],
         ),

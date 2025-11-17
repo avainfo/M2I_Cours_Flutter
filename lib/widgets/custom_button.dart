@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:m2i_cours_flutter/widgets/custom_text.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class CustomButton extends StatefulWidget {
+  Function event;
+  CustomButton({
     super.key,
+    required this.event,
   });
 
+  @override
+  State<CustomButton> createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -13,13 +20,24 @@ class CustomButton extends StatelessWidget {
       borderRadius: .circular(8),
       child: InkWell(
         onTap: () {
-          print("tap");
+          widget.event();
         },
         splashColor: Colors.green,
         borderRadius: .circular(8),
         child: Container(
           padding: .symmetric(horizontal: 24, vertical: 12),
-          child: CustomText(text: "Incrémenter le counter"),
+          child: FittedBox(
+            child: Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 15),
+                CustomText(text: "Incrémenter le counter"),
+              ],
+            ),
+          ),
         ),
       ),
     );
