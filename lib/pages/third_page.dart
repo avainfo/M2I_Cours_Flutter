@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:m2i_cours_flutter/widgets/third_page/custom_list_view.dart';
+import 'package:m2i_cours_flutter/widgets/third_page/offset_counter.dart';
 
 class ThirdPage extends StatefulWidget {
   const ThirdPage({super.key});
@@ -10,6 +12,7 @@ class ThirdPage extends StatefulWidget {
 class _ThirdPageState extends State<ThirdPage> {
   List<Widget> widgetsGetFromOnline = [];
   final ScrollController _scrollController = ScrollController();
+  double scrollOffset = 0;
 
   @override
   void initState() {
@@ -17,7 +20,11 @@ class _ThirdPageState extends State<ThirdPage> {
       widgetsGetFromOnline.add(Text("Salut : $i"));
     }
     _scrollController.addListener(() {
-      print(_scrollController.offset);
+      if ((_scrollController.offset - scrollOffset).abs() > 100) {
+        setState(() {
+          scrollOffset = _scrollController.offset;
+        });
+      }
     });
     super.initState();
   }
@@ -25,25 +32,15 @@ class _ThirdPageState extends State<ThirdPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ListView.separated(
-          controller: _scrollController,
-          itemCount: widgetsGetFromOnline.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              margin: .symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                borderRadius: .circular(500),
-                color: Colors.black38,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: widgetsGetFromOnline[index],
-              ),
-            );
-          },
-          separatorBuilder: (context, index) => Divider(),
-        ),
+      body: Stack(
+        alignment: .topCenter,
+        children: [
+          CustomListView(
+            scrollController: _scrollController,
+            widgetsGetFromOnline: widgetsGetFromOnline,
+          ),
+          OffsetCounter(scrollOffset: scrollOffset),
+        ],
       ),
     );
   }
