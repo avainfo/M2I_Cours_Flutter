@@ -9,12 +9,16 @@ class ThirdPage extends StatefulWidget {
 
 class _ThirdPageState extends State<ThirdPage> {
   List<Widget> widgetsGetFromOnline = [];
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     for (int i = 0; i < 100; i++) {
       widgetsGetFromOnline.add(Text("Salut : $i"));
     }
+    _scrollController.addListener(() {
+      print(_scrollController.offset);
+    });
     super.initState();
   }
 
@@ -23,6 +27,7 @@ class _ThirdPageState extends State<ThirdPage> {
     return Scaffold(
       body: Center(
         child: ListView.separated(
+          controller: _scrollController,
           itemCount: widgetsGetFromOnline.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
