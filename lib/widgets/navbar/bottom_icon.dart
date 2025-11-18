@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class BottomIcon extends StatefulWidget {
+class BottomIcon extends StatelessWidget {
   final IconData icon;
   final String text;
   final Color color;
   final Function() func;
 
-  BottomIcon({
+  const BottomIcon({
     super.key,
     this.icon = Icons.question_mark_rounded,
     this.text = "Not configured",
@@ -15,15 +15,10 @@ class BottomIcon extends StatefulWidget {
   });
 
   @override
-  State<BottomIcon> createState() => _BottomIconState();
-}
-
-class _BottomIconState extends State<BottomIcon> {
-  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        widget.func();
+        func();
       },
       borderRadius: .circular(50),
       child: Padding(
@@ -31,12 +26,12 @@ class _BottomIconState extends State<BottomIcon> {
         child: Column(
           children: [
             Icon(
-              widget.icon,
-              color: widget.color,
+              icon,
+              color: color,
             ),
             Text(
-              widget.text,
-              style: TextStyle(color: widget.color),
+              text,
+              style: TextStyle(color: color),
             ),
           ],
         ),
