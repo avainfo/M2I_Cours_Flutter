@@ -1,8 +1,17 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
-import 'package:m2i_cours_flutter/pages/third_page.dart';
+import 'package:m2i_cours_flutter/screens/home_page.dart';
 
 void main() {
   runApp(const MyApp());
+
+  doWhenWindowReady(() {
+    const initialSize = Size(600, 450);
+    appWindow.minSize = initialSize;
+    appWindow.size = initialSize;
+    appWindow.alignment = Alignment.center;
+    appWindow.show();
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: ThirdPage(),
+      home: HomePage(),
     );
   }
 }
