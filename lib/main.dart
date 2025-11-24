@@ -1,6 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:m2i_cours_flutter/screens/home_page.dart';
+
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +21,10 @@ void main() async {
     await windowManager.show();
     await windowManager.focus();
   });
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(const MyApp());
 }
