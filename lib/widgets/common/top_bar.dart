@@ -13,12 +13,17 @@ class TopBar extends StatefulWidget {
 class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ServerMainInfo(),
-        ServersSlider(),
-        TopBarIcons(),
-      ],
+    return Padding(
+      padding: const .symmetric(vertical: 16, horizontal: 32),
+      child: SizedBox(
+        child: Row(
+          children: [
+            ServerMainInfo(),
+            ServersSlider(),
+            TopBarIcons(),
+          ],
+        ),
+      ),
     );
   }
 }

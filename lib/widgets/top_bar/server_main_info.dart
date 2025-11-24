@@ -13,48 +13,45 @@ class ServerMainInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var baseHeight = MediaQuery.of(context).size.height / 18.5;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        spacing: baseHeight / 2,
-        children: [
-          SizedBox(
-            width: baseHeight,
-            child: ClipRRect(
-              borderRadius: .circular(12),
-              child: Image.network(
-                imageUrl,
-              ),
+    return Row(
+      spacing: baseHeight / 2,
+      children: [
+        SizedBox(
+          width: baseHeight,
+          child: ClipRRect(
+            borderRadius: .circular(12),
+            child: Image.network(
+              imageUrl,
             ),
           ),
-          Column(
-            mainAxisAlignment: .center,
-            crossAxisAlignment: .start,
-            children: [
-              SizedBox(
-                height: baseHeight / 2,
-                child: FittedBox(
-                  child: Text(
-                    serverName,
-                    style: TextStyle(color: Colors.white70),
-                    textAlign: .start,
-                  ),
+        ),
+        Column(
+          mainAxisAlignment: .center,
+          crossAxisAlignment: .start,
+          children: [
+            SizedBox(
+              height: baseHeight / 2,
+              child: FittedBox(
+                child: Text(
+                  serverName,
+                  style: TextStyle(color: Colors.white70),
+                  textAlign: .start,
                 ),
               ),
-              SizedBox(
-                height: baseHeight / 2.75,
-                child: FittedBox(
-                  child: Text(
-                    "$channelsCount channels",
-                    style: TextStyle(color: Colors.white38),
-                    textAlign: .start,
-                  ),
+            ),
+            SizedBox(
+              height: baseHeight / 2.75,
+              child: FittedBox(
+                child: Text(
+                  "$channelsCount channels",
+                  style: TextStyle(color: Colors.white38),
+                  textAlign: .start,
                 ),
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
