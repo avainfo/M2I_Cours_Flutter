@@ -17,10 +17,12 @@ class ServerMainInfo extends StatelessWidget {
       children: [
         SizedBox(
           width: 45,
+          height: 45,
           child: ClipRRect(
             borderRadius: .circular(12),
             child: Image.network(
               imageUrl,
+              fit: .cover,
             ),
           ),
         ),
