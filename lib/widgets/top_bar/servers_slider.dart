@@ -1,30 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:m2i_cours_flutter/data/repositories/servers_repo.dart';
+import 'package:m2i_cours_flutter/providers/servers_provider.dart';
+import 'package:m2i_cours_flutter/widgets/top_bar/basic_icon_button.dart';
 import 'package:m2i_cours_flutter/widgets/top_bar/server_slider_card.dart';
+import 'package:provider/provider.dart';
 
-class ServersSlider extends StatelessWidget {
+class ServersSlider extends StatefulWidget {
   const ServersSlider({
     super.key,
   });
 
   @override
+  State<ServersSlider> createState() => _ServersSliderState();
+}
+
+class _ServersSliderState extends State<ServersSlider> {
+  final ScrollController _scrollCtrl = ScrollController();
+  int selected = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    ServersRepo.getServers().then(
+      (servers) {
+        if (!context.mounted) return;
+        context.read<ServersProvider>().updateServers(servers);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        height: 50,
-        child: Row(
-          children: [
-            ServerSliderCard(
-              icon: Icons.code,
-              title: "Ava Info Server",
-              selected: true,
+      child: Row(
+        children: [
+          ScrollerIconButton(direction: .left, scrollCtrl: _scrollCtrl),
+          Expanded(
+            child: SizedBox(
+              height: 50,
+              child: Consumer<ServersProvider>(
+                builder: (_, servers, _) {
+                  return ListView.builder(
+                    scrollDirection: .horizontal,
+                    controller: _scrollCtrl,
+                    itemBuilder: (context, index) => ServerSliderCard(
+                      icon: Icons.code,
+                      title: servers.servers[index].name,
+                      selected: selected == index,
+                      setSelected: () {
+                        if (selected == index) return;
+                        setState(() {
+                          selected = index;
+                        });
+                      },
+                    ),
+                    itemCount: servers.servers.length,
+                  );
+                },
+              ),
             ),
-            ServerSliderCard(
-              icon: Icons.code,
-              title: "Ava Info Server 2",
-              selected: false,
-            ),
-          ],
-        ),
+          ),
+          ScrollerIconButton(direction: .right, scrollCtrl: _scrollCtrl),
+        ],
       ),
     );
   }
