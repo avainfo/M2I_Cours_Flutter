@@ -12,12 +12,11 @@ class ServerMainInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var baseHeight = MediaQuery.of(context).size.height / 18.5;
     return Row(
-      spacing: baseHeight / 2,
+      spacing: 20,
       children: [
         SizedBox(
-          width: baseHeight,
+          width: 45,
           child: ClipRRect(
             borderRadius: .circular(12),
             child: Image.network(
@@ -30,7 +29,7 @@ class ServerMainInfo extends StatelessWidget {
           crossAxisAlignment: .start,
           children: [
             SizedBox(
-              height: baseHeight / 2,
+              height: 25,
               child: FittedBox(
                 child: Text(
                   serverName,
@@ -40,7 +39,7 @@ class ServerMainInfo extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: baseHeight / 2.75,
+              height: 20,
               child: FittedBox(
                 child: Text(
                   "$channelsCount channels",

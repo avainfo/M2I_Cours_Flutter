@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TopBarIcons extends StatelessWidget {
-  const TopBarIcons({
+class TopBarButtons extends StatelessWidget {
+  const TopBarButtons({
     super.key,
   });
 
