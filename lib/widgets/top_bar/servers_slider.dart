@@ -28,6 +28,9 @@ class _ServersSliderState extends State<ServersSlider> {
       (servers) {
         if (!context.mounted) return;
         context.read<ServersProvider>().updateServers(servers);
+        context.read<ServersProvider>().updateSelectedServers(
+          servers[0],
+        );
       },
     );
   }

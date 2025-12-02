@@ -17,7 +17,7 @@ class ScrollerIconButton extends StatelessWidget {
       onPressed: () {
         scrollCtrl.animateTo(
           scrollCtrl.position.pixels + direction.offset,
-          duration: const Duration(milliseconds: 150),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
         );
       },
