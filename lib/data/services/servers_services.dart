@@ -7,7 +7,7 @@ class ServersServices with HttpExtensionHelper {
   Future<List<Server>> getServers(String userId) async {
     final List<Server> servers = [];
     final response = await getJsonApi(
-      endpoints: "/api/servers",
+      endpoints: "/servers",
       queryParameters: {"userId": userId},
     );
     if (response.statusCode != 200) return [];

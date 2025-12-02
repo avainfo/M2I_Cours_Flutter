@@ -8,7 +8,7 @@ mixin HttpExtensionHelper {
     Map<String, String> queryParameters = const {},
   }) async {
     final response = await http.get(
-      Uri.https(GlobalData.BASE_URL, endpoints, queryParameters),
+      Uri.https(GlobalData.BASE_URL, "/api$endpoints", queryParameters),
     );
     return response;
   }

@@ -26,7 +26,7 @@ class ServerMainInfo extends StatelessWidget {
             child: Selector<ServersProvider, Server?>(
               selector: (_, servers) => servers.selectedServer,
               builder: (_, value, _) {
-                if(value == null) {
+                if (value == null) {
                   return Image.network(
                     imageUrl,
                     fit: .cover,
@@ -48,10 +48,14 @@ class ServerMainInfo extends StatelessWidget {
             SizedBox(
               height: 25,
               child: FittedBox(
-                child: Text(
-                  serverName,
-                  style: TextStyle(color: Colors.white70),
-                  textAlign: .start,
+                child: Selector<ServersProvider, Server?>(
+                  selector: (_, serverProvider) =>
+                      serverProvider.selectedServer,
+                  builder: (_, server, _) => Text(
+                    (server == null) ? "Loading" : server.name,
+                    style: TextStyle(color: Colors.white70),
+                    textAlign: .start,
+                  ),
                 ),
               ),
             ),
