@@ -1,5 +1,5 @@
 import 'package:m2i_cours_flutter/data/global_data.dart';
-import 'package:m2i_cours_flutter/data/models/Server.dart';
+import 'package:m2i_cours_flutter/data/models/server.dart';
 import 'package:m2i_cours_flutter/data/services/servers_services.dart';
 
 class ServersRepo {

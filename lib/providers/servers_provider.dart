@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:m2i_cours_flutter/data/models/Server.dart';
+import 'package:m2i_cours_flutter/data/models/server.dart';
 
 class ServersProvider with ChangeNotifier {
   List<Server> servers = [];

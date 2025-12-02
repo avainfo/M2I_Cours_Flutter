@@ -6,7 +6,7 @@ import 'package:m2i_cours_flutter/widgets/top_bar/basic_icon_button.dart';
 import 'package:m2i_cours_flutter/widgets/top_bar/server_slider_card.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/models/Server.dart';
+import '../../data/models/server.dart';
 
 class ServersSlider extends StatefulWidget {
   const ServersSlider({

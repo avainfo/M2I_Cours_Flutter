@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:m2i_cours_flutter/data/models/Server.dart';
+import 'package:m2i_cours_flutter/data/models/server.dart';
 import 'package:m2i_cours_flutter/utils/http_extension_helper.dart';
 
 class ServersServices with HttpExtensionHelper {
