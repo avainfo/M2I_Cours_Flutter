@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:m2i_cours_flutter/data/models/server.dart';
 import 'package:m2i_cours_flutter/utils/http_extension_helper.dart';
+import 'package:m2i_cours_flutter/utils/response_extension.dart';
 
 class ServersServices with HttpExtensionHelper {
   Future<List<Server>> getServers(String userId) async {
@@ -10,10 +9,8 @@ class ServersServices with HttpExtensionHelper {
       endpoints: "/servers",
       queryParameters: {"userId": userId},
     );
-    if (response.statusCode != 200) return [];
-    final data = jsonDecode(response.body);
-    if (data['servers'] == null) return [];
-    for (final server in data['servers']) {
+    if (!response.succeed || response.jsonBody['servers'] == null) return [];
+    for (final server in response.jsonBody['servers']) {
       servers.add(Server.fromJson(server));
     }
     return servers;
