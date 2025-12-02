@@ -35,6 +35,12 @@ class ServerMainInfo extends StatelessWidget {
                 return Image.network(
                   value.imageUrl,
                   fit: .cover,
+                  errorBuilder: (context, error, stackTrace) => Center(
+                    child: Icon(
+                      Icons.broken_image_outlined,
+                      color: Colors.white30,
+                    ),
+                  ),
                 );
               },
             ),
