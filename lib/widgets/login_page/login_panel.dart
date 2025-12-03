@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m2i_cours_flutter/utils/context_extension.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/login_content.dart';
 
 class LoginPanel extends StatelessWidget {
@@ -7,19 +8,33 @@ class LoginPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Color(0xFF12233D),
-            borderRadius: .circular(25),
-            boxShadow: [
-              BoxShadow(color: Colors.black26, blurRadius: 20),
-            ],
-            border: Border.all(color: Colors.white12),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height / 8,
           ),
-          width: MediaQuery.of(context).size.width / 2,
-          height: MediaQuery.of(context).size.height / 1.5,
-          child: LoginContent(),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight:
+                  MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).size.height / 4 -
+                  35,
+            ),
+            child: Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF12233D),
+                  borderRadius: .circular(25),
+                  boxShadow: [
+                    BoxShadow(color: Colors.black26, blurRadius: 20),
+                  ],
+                  border: Border.all(color: Colors.white12),
+                ),
+                width: context.screenWidth / 2,
+                child: LoginContent(),
+              ),
+            ),
+          ),
         ),
       ),
     );

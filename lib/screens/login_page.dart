@@ -12,11 +12,23 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF0f172b),
-      body: Column(
-        children: [
-          if (!kIsWeb && Platform.isWindows) WindowsBar(),
-          LoginPanel(),
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            center: AlignmentGeometry.xy(-2, -2),
+            radius: 1.5,
+            colors: [
+              Color(0x652A4269),
+              Color(0xFF0f172b),
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            if (!kIsWeb && Platform.isWindows) WindowsBar(),
+            LoginPanel(),
+          ],
+        ),
       ),
     );
   }
