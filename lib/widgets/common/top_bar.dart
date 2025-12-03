@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:m2i_cours_flutter/widgets/top_bar/top_bar_buttons.dart';
-import 'package:m2i_cours_flutter/widgets/top_bar/account_button.dart';
-import 'package:m2i_cours_flutter/widgets/top_bar/server_main_info.dart';
-import 'package:m2i_cours_flutter/widgets/top_bar/servers_slider.dart';
+
+import '../home_page/top_bar/account_button.dart';
+import '../home_page/top_bar/server_main_info.dart';
+import '../home_page/top_bar/servers_slider.dart';
+import '../home_page/top_bar/top_bar_buttons.dart';
 
 class TopBar extends StatefulWidget {
   const TopBar({super.key});

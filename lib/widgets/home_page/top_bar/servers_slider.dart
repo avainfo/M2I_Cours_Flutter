@@ -2,11 +2,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:m2i_cours_flutter/data/repositories/servers_repo.dart';
 import 'package:m2i_cours_flutter/data/providers/servers_provider.dart';
-import 'package:m2i_cours_flutter/widgets/top_bar/basic_icon_button.dart';
-import 'package:m2i_cours_flutter/widgets/top_bar/server_slider_card.dart';
+import 'package:m2i_cours_flutter/widgets/home_page/top_bar/server_slider_card.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/models/server.dart';
+import '../../../data/models/server.dart';
+import 'basic_icon_button.dart';
 
 class ServersSlider extends StatefulWidget {
   const ServersSlider({
