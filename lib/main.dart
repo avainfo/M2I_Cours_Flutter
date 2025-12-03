@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:m2i_cours_flutter/providers/servers_provider.dart';
+import 'package:m2i_cours_flutter/data/providers/servers_provider.dart';
 import 'package:m2i_cours_flutter/screens/home_page.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';

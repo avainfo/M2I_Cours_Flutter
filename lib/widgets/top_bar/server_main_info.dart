@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:m2i_cours_flutter/data/models/server.dart';
-import 'package:m2i_cours_flutter/providers/servers_provider.dart';
+import 'package:m2i_cours_flutter/data/providers/servers_provider.dart';
 import 'package:provider/provider.dart';
 
 class ServerMainInfo extends StatelessWidget {
