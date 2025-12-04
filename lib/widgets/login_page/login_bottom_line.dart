@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LoginBottomLine extends StatelessWidget {
   final VoidCallback changeValue;
   final bool rememberMe;
-  
+
   const LoginBottomLine({
     super.key,
     required this.changeValue,
