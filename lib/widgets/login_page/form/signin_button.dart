@@ -20,7 +20,6 @@ class SignInButton extends StatelessWidget {
       height: 50,
       child: FilledButton(
         onPressed: () async {
-          print("test");
           try {
             final credential = await FirebaseAuth.instance
                 .createUserWithEmailAndPassword(
