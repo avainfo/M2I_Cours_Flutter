@@ -5,12 +5,14 @@ class LoginInput extends StatelessWidget {
   final String label;
   final String hint;
   final TextEditingController controller;
+  final String? errorText;
 
   const LoginInput({
     super.key,
     required this.label,
     required this.hint,
     required this.controller,
+    this.errorText,
   });
 
   @override
@@ -28,7 +30,6 @@ class LoginInput extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 50,
           width: context.screenWidth / 2 - 64,
           child: Center(
             child: TextField(
@@ -53,8 +54,13 @@ class LoginInput extends StatelessWidget {
                   fontWeight: .w300,
                   color: Colors.white38,
                 ),
+                errorText: (errorText == null || errorText!.isEmpty)
+                    ? null
+                    : errorText,
               ),
               controller: controller,
+              obscureText: label == "Password",
+              enableSuggestions: false,
               style: TextStyle(
                 color: Colors.white70,
               ),

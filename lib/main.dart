@@ -8,6 +8,7 @@ import 'package:m2i_cours_flutter/data/providers/servers_provider.dart';
 import 'package:m2i_cours_flutter/screens/home_page.dart';
 import 'package:m2i_cours_flutter/screens/login_page.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'firebase_options.dart';
@@ -40,7 +41,7 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (BuildContext context) => ServersProvider(),
-      child: const MyApp(),
+      child: const ToastificationWrapper(child: MyApp()),
     ),
   );
 }

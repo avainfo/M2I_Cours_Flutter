@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:m2i_cours_flutter/widgets/login_page/google_login_button.dart';
-import 'package:m2i_cours_flutter/widgets/login_page/login_bottom_line.dart';
-import 'package:m2i_cours_flutter/widgets/login_page/login_input.dart';
-import 'package:m2i_cours_flutter/widgets/login_page/login_title.dart';
-import 'package:m2i_cours_flutter/widgets/login_page/or_separator.dart';
+import 'package:m2i_cours_flutter/widgets/login_page/form/google_login_button.dart';
+import 'package:m2i_cours_flutter/widgets/login_page/form/login_bottom_line.dart';
+import 'package:m2i_cours_flutter/widgets/login_page/form/login_input.dart';
+import 'package:m2i_cours_flutter/widgets/login_page/form/login_title.dart';
+import 'package:m2i_cours_flutter/widgets/login_page/form/or_separator.dart';
+import 'package:m2i_cours_flutter/widgets/login_page/form/signin_button.dart';
 
 class LoginContent extends StatefulWidget {
   const LoginContent({super.key});
@@ -15,7 +16,31 @@ class LoginContent extends StatefulWidget {
 class _LoginContentState extends State<LoginContent> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final List<String> warningsCode = [
+    'weak-password',
+    'email-already-in-use',
+    'invalid-email',
+  ];
   bool rememberMe = false;
+  String? emailErrorText;
+
+  @override
+  void initState() {
+    super.initState();
+    emailController.addListener(() {
+      if (!validateEmail(emailController.text) &&
+          emailErrorText != "Invalid email") {
+        setState(() {
+          emailErrorText = "Invalid email";
+        });
+      } else if (validateEmail(emailController.text) &&
+          emailErrorText != null) {
+        setState(() {
+          emailErrorText = null;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +57,7 @@ class _LoginContentState extends State<LoginContent> {
             label: "Email",
             hint: "Enter email address",
             controller: emailController,
+            errorText: emailErrorText,
           ),
           LoginInput(
             label: "Password",
@@ -39,27 +65,10 @@ class _LoginContentState extends State<LoginContent> {
             controller: passwordController,
           ),
           LoginBottomLine(changeValue: changeValue, rememberMe: rememberMe),
-          SizedBox(
-            height: 50,
-            child: FilledButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(Colors.black),
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(borderRadius: .circular(15)),
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: .w300,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+          SignInButton(
+            emailController: emailController,
+            passwordController: passwordController,
+            warningsCode: warningsCode,
           ),
         ],
       ),
@@ -70,5 +79,9 @@ class _LoginContentState extends State<LoginContent> {
     setState(() {
       rememberMe = !rememberMe;
     });
+  }
+
+  bool validateEmail(String email) {
+    return RegExp(r'^[^@]+@[^@]+\.[^@]+$').hasMatch(email);
   }
 }
