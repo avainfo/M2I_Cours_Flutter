@@ -30,6 +30,13 @@ class SignInButton extends StatelessWidget {
             print("Credential : $credential");
           } on FirebaseAuthException catch (e) {
             toastification.show(
+              closeOnClick: true,
+              alignment: .bottomRight,
+              icon: Icon(
+                warningsCode.contains(e.code)
+                    ? Icons.warning_amber_rounded
+                    : Icons.error_outline_rounded,
+              ),
               style: .flatColored,
               type: warningsCode.contains(e.code) ? .warning : .error,
               title: Text(
