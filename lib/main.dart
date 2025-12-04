@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'utils/globals.dart' as globals;
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:m2i_cours_flutter/data/providers/servers_provider.dart';
+import 'package:m2i_cours_flutter/data/providers/status_provider.dart';
 import 'package:m2i_cours_flutter/screens/home_page.dart';
 import 'package:m2i_cours_flutter/screens/login_page.dart';
 import 'package:provider/provider.dart';
@@ -40,9 +40,17 @@ void main() async {
   );
 
   runApp(
-    ChangeNotifierProvider(
-      create: (BuildContext context) => ServersProvider(),
-      child: ToastificationWrapper(child: MyApp()),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) => ServersProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => StatusProvider(),
+        ),
+      ],
+
+      child: const ToastificationWrapper(child: MyApp()),
     ),
   );
 }
@@ -62,9 +70,7 @@ final router = GoRouter(
 );
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key}) {
-    globals.isLoggedIn = false;
-  }
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

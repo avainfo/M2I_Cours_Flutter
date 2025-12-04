@@ -11,7 +11,7 @@ class LoginPanel extends StatefulWidget {
 }
 
 class _LoginPanelState extends State<LoginPanel> {
-  bool login = true;
+  bool isLogin = true;
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +41,13 @@ class _LoginPanelState extends State<LoginPanel> {
                       border: Border.all(color: Colors.white12),
                     ),
                     width: context.screenWidth / 2,
-                    child: LoginContent(login: login),
+                    child: LoginContent(isLogin: isLogin),
                   ),
                   SizedBox(height: 16),
 
                   FormExchanger(
                     changeLoginState: changeLoginState,
-                    login: login,
+                    login: isLogin,
                   ),
                 ],
               ),
@@ -60,7 +60,7 @@ class _LoginPanelState extends State<LoginPanel> {
 
   void changeLoginState() {
     return setState(() {
-      login = !login;
+      isLogin = !isLogin;
     });
   }
 }

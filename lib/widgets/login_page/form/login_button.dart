@@ -1,16 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:m2i_cours_flutter/data/providers/status_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 
-class SignInButton extends StatelessWidget {
+class LoginButton extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final TextEditingController confirmPasswordController;
+  final bool isLogin;
   final List<String> warningsCode;
 
-  const SignInButton({
+  const LoginButton({
     super.key,
     required this.emailController,
     required this.passwordController,
+    required this.confirmPasswordController,
+    required this.isLogin,
     required this.warningsCode,
   });
 
@@ -20,40 +28,10 @@ class SignInButton extends StatelessWidget {
       height: 50,
       child: FilledButton(
         onPressed: () async {
-          try {
-            final credential = await FirebaseAuth.instance
-                .createUserWithEmailAndPassword(
-                  email: emailController.text,
-                  password: passwordController.text,
-                );
-            print("Credential : $credential");
-          } on FirebaseAuthException catch (e) {
-            toastification.show(
-              closeOnClick: true,
-              alignment: .bottomRight,
-              icon: Icon(
-                warningsCode.contains(e.code)
-                    ? Icons.warning_amber_rounded
-                    : Icons.error_outline_rounded,
-              ),
-              style: .flatColored,
-              type: warningsCode.contains(e.code) ? .warning : .error,
-              title: Text(
-                warningsCode.contains(e.code) ? "Warning" : "Error",
-              ),
-              description: Text(e.message ?? "Error"),
-              showProgressBar: true,
-              autoCloseDuration: Duration(seconds: 3),
-            );
-          } catch (e) {
-            toastification.show(
-              style: .flatColored,
-              type: .error,
-              title: Text("Error"),
-              description: Text("Error on login"),
-              showProgressBar: true,
-              autoCloseDuration: Duration(seconds: 3),
-            );
+          if (isLogin) {
+            await login(context);
+          } else {
+            await signIn(context);
           }
         },
         style: ButtonStyle(
@@ -64,7 +42,7 @@ class SignInButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "Login",
+            isLogin ? "Login" : "Create Account",
             style: TextStyle(
               fontSize: 16,
               fontWeight: .w300,
@@ -73,6 +51,91 @@ class SignInButton extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> login(BuildContext context) async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      if (kDebugMode) {
+        print("Credential : $credential");
+      }
+    } on FirebaseAuthException catch (e) {
+      showLoggingToast(e);
+      return;
+    } catch (e) {
+      toastification.show(
+        style: .flatColored,
+        type: .error,
+        title: Text("Error"),
+        description: Text("Error on login"),
+        showProgressBar: true,
+        autoCloseDuration: Duration(seconds: 3),
+      );
+      return;
+    }
+    if (context.mounted) context.go('/');
+  }
+
+  Future<void> signIn(BuildContext context) async {
+    if (passwordController.text != confirmPasswordController.text) {
+      toastification.show(
+        style: .flatColored,
+        type: .error,
+        title: Text("Password mismatch"),
+        description: Text("Passwords do not match each other"),
+        showProgressBar: true,
+        autoCloseDuration: Duration(seconds: 3),
+      );
+      return;
+    }
+    try {
+      final credential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text,
+          );
+      if (kDebugMode) {
+        print("Credential : $credential");
+      }
+    } on FirebaseAuthException catch (e) {
+      showLoggingToast(e);
+      return;
+    } catch (e) {
+      toastification.show(
+        style: .flatColored,
+        type: .error,
+        title: Text("Error"),
+        description: Text("Error on login"),
+        showProgressBar: true,
+        autoCloseDuration: Duration(seconds: 3),
+      );
+      return;
+    }
+    context.read<StatusProvider>().login();
+    if (context.mounted) context.go('/');
+  }
+
+  void showLoggingToast(FirebaseAuthException e) {
+    toastification.show(
+      closeOnClick: true,
+      alignment: .bottomRight,
+      icon: Icon(
+        warningsCode.contains(e.code)
+            ? Icons.warning_amber_rounded
+            : Icons.error_outline_rounded,
+      ),
+      style: .flatColored,
+      type: warningsCode.contains(e.code) ? .warning : .error,
+      title: Text(
+        warningsCode.contains(e.code) ? "Warning" : "Error",
+      ),
+      description: Text(e.message ?? "Error"),
+      showProgressBar: true,
+      autoCloseDuration: Duration(seconds: 3),
     );
   }
 }

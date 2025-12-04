@@ -59,7 +59,7 @@ class LoginInput extends StatelessWidget {
                     : errorText,
               ),
               controller: controller,
-              obscureText: label == "Password",
+              obscureText: label.contains("Password"),
               enableSuggestions: false,
               style: TextStyle(
                 color: Colors.white70,

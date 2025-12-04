@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/form/google_login_button.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/form/login_bottom_line.dart';
+import 'package:m2i_cours_flutter/widgets/login_page/form/login_button.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/form/login_input.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/form/login_title.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/form/login_or_separator.dart';
-import 'package:m2i_cours_flutter/widgets/login_page/form/signin_button.dart';
 
 class LoginContent extends StatefulWidget {
-  final bool login;
+  final bool isLogin;
 
-  const LoginContent({super.key, required this.login});
+  const LoginContent({super.key, required this.isLogin});
 
   @override
   State<LoginContent> createState() => _LoginContentState();
@@ -18,6 +18,7 @@ class LoginContent extends StatefulWidget {
 class _LoginContentState extends State<LoginContent> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final List<String> warningsCode = [
     'weak-password',
     'email-already-in-use',
@@ -66,20 +67,22 @@ class _LoginContentState extends State<LoginContent> {
             hint: "Enter your password",
             controller: passwordController,
           ),
-          if (!widget.login)
+          if (!widget.isLogin)
             LoginInput(
               label: "Confirm Password",
               hint: "Confirm password",
-              controller: passwordController,
+              controller: confirmPasswordController,
             ),
           LoginBottomLine(
             changeValue: changeValue,
             checkBoxAction: checkBoxAction,
-            login: widget.login,
+            login: widget.isLogin,
           ),
-          SignInButton(
+          LoginButton(
             emailController: emailController,
             passwordController: passwordController,
+            confirmPasswordController: confirmPasswordController,
+            isLogin: widget.isLogin,
             warningsCode: warningsCode,
           ),
         ],

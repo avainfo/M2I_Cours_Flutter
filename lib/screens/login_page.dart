@@ -2,11 +2,27 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:m2i_cours_flutter/data/providers/status_provider.dart';
 import 'package:m2i_cours_flutter/widgets/common/windows_bar.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/login_panel.dart';
+import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  @override
+  void initState() {
+    super.initState();
+    if (context.read<StatusProvider>().isLoggedIn) {
+      context.go("/");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
