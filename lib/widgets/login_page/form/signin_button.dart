@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
 class SignInButton extends StatelessWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final List<String> warningsCode;
+
   const SignInButton({
     super.key,
     required this.emailController,
     required this.passwordController,
     required this.warningsCode,
   });
-
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-  final List<String> warningsCode;
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,9 @@ import 'package:m2i_cours_flutter/widgets/login_page/form/or_separator.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/form/signin_button.dart';
 
 class LoginContent extends StatefulWidget {
-  const LoginContent({super.key});
+  final bool login;
+
+  const LoginContent({super.key, required this.login});
 
   @override
   State<LoginContent> createState() => _LoginContentState();
@@ -21,7 +23,7 @@ class _LoginContentState extends State<LoginContent> {
     'email-already-in-use',
     'invalid-email',
   ];
-  bool rememberMe = false;
+  bool checkBoxAction = false;
   String? emailErrorText;
 
   @override
@@ -64,7 +66,17 @@ class _LoginContentState extends State<LoginContent> {
             hint: "Enter your password",
             controller: passwordController,
           ),
-          LoginBottomLine(changeValue: changeValue, rememberMe: rememberMe),
+          if (!widget.login)
+            LoginInput(
+              label: "Confirm Password",
+              hint: "Confirm password",
+              controller: passwordController,
+            ),
+          LoginBottomLine(
+            changeValue: changeValue,
+            checkBoxAction: checkBoxAction,
+            login: widget.login,
+          ),
           SignInButton(
             emailController: emailController,
             passwordController: passwordController,
@@ -77,7 +89,7 @@ class _LoginContentState extends State<LoginContent> {
 
   void changeValue() {
     setState(() {
-      rememberMe = !rememberMe;
+      checkBoxAction = !checkBoxAction;
     });
   }
 

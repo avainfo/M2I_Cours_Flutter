@@ -21,17 +21,22 @@ class LoginPanel extends StatelessWidget {
                   35,
             ),
             child: Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF12233D),
-                  borderRadius: .circular(25),
-                  boxShadow: [
-                    BoxShadow(color: Colors.black26, blurRadius: 20),
-                  ],
-                  border: Border.all(color: Colors.white12),
-                ),
-                width: context.screenWidth / 2,
-                child: LoginContent(),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFF12233D),
+                      borderRadius: .circular(25),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black26, blurRadius: 20),
+                      ],
+                      border: Border.all(color: Colors.white12),
+                    ),
+                    width: context.screenWidth / 2,
+                    child: LoginContent(login: true),
+                  ),
+
+                ],
               ),
             ),
           ),

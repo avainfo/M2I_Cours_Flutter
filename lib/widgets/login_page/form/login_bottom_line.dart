@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class LoginBottomLine extends StatelessWidget {
   final VoidCallback changeValue;
-  final bool rememberMe;
+  final bool checkBoxAction;
+  final bool login;
 
   const LoginBottomLine({
     super.key,
     required this.changeValue,
-    required this.rememberMe,
+    required this.checkBoxAction,
+    required this.login,
   });
 
   @override
@@ -20,7 +22,7 @@ class LoginBottomLine extends StatelessWidget {
           height: 24,
           width: 24,
           child: Checkbox(
-            value: rememberMe,
+            value: checkBoxAction,
             onChanged: (v) => changeValue(),
             fillColor: WidgetStatePropertyAll(Colors.white10),
             side: BorderSide(color: Colors.white12),
@@ -34,7 +36,7 @@ class LoginBottomLine extends StatelessWidget {
         InkWell(
           onTap: () => changeValue(),
           child: Text(
-            "Remember me",
+            login ? "Remember me" : "I agree to the terms and conditions",
             style: TextStyle(
               fontSize: 16,
               fontWeight: .w300,
@@ -42,18 +44,19 @@ class LoginBottomLine extends StatelessWidget {
             ),
           ),
         ),
-        Spacer(),
-        InkWell(
-          onTap: () {},
-          child: Text(
-            "Forgot password?",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: .w500,
-              color: Colors.white,
+        if (login) Spacer(),
+        if (login)
+          InkWell(
+            onTap: () {},
+            child: Text(
+              "Forgot password?",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: .w500,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
       ],
     );
   }
