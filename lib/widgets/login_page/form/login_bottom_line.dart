@@ -44,7 +44,7 @@ class LoginBottomLine extends StatelessWidget {
             ),
           ),
         ),
-        if (login) Spacer(),
+        Spacer(),
         if (login)
           InkWell(
             onTap: () {},

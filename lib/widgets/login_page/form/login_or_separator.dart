@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class OrSeparator extends StatelessWidget {
-  const OrSeparator({
+class LoginOrSeparator extends StatelessWidget {
+  const LoginOrSeparator({
     super.key,
   });
 

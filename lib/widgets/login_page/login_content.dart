@@ -3,7 +3,7 @@ import 'package:m2i_cours_flutter/widgets/login_page/form/google_login_button.da
 import 'package:m2i_cours_flutter/widgets/login_page/form/login_bottom_line.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/form/login_input.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/form/login_title.dart';
-import 'package:m2i_cours_flutter/widgets/login_page/form/or_separator.dart';
+import 'package:m2i_cours_flutter/widgets/login_page/form/login_or_separator.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/form/signin_button.dart';
 
 class LoginContent extends StatefulWidget {
@@ -47,14 +47,14 @@ class _LoginContentState extends State<LoginContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: .symmetric(vertical: 32, horizontal: 32),
+      padding: .symmetric(vertical: 24, horizontal: 32),
       child: Column(
         crossAxisAlignment: .start,
         spacing: 32,
         children: [
           const LoginTitle(),
           const GoogleLoginButton(),
-          const OrSeparator(),
+          const LoginOrSeparator(),
           LoginInput(
             label: "Email",
             hint: "Enter email address",
