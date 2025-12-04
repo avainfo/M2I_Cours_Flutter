@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:m2i_cours_flutter/utils/pref_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StatusProvider with ChangeNotifier {
@@ -10,7 +11,7 @@ class StatusProvider with ChangeNotifier {
     if (checkBoxValue) {
       SharedPreferences.getInstance().then(
         (instance) => {
-          instance.setBool("isLoggedIn", checkBoxValue),
+          instance.setBool(PrefKeys.isLoggedIn, checkBoxValue),
         },
       );
     }

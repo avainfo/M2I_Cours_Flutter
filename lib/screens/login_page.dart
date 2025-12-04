@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:m2i_cours_flutter/utils/pref_keys.dart';
 import 'package:m2i_cours_flutter/widgets/common/windows_bar.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/login_panel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,14 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
 
-    SharedPreferences.getInstance().then(
-      (instance) {
-        if (instance.getBool("isLoggedIn") != null &&
-            instance.getBool("isLoggedIn")!) {
-          if (context.mounted) context.go("/");
-        }
-      },
-    );
+    _checkLoginStatus();
   }
 
   @override
@@ -52,5 +46,14 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _checkLoginStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool(PrefKeys.isLoggedIn) ?? false) {
+      if (mounted) {
+        context.go("/");
+      }
+    }
   }
 }
