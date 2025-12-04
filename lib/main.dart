@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'utils/globals.dart' as globals;
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -41,7 +42,7 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (BuildContext context) => ServersProvider(),
-      child: const ToastificationWrapper(child: MyApp()),
+      child: ToastificationWrapper(child: MyApp()),
     ),
   );
 }
@@ -61,7 +62,9 @@ final router = GoRouter(
 );
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key}) {
+    globals.isLoggedIn = false;
+  }
 
   @override
   Widget build(BuildContext context) {
