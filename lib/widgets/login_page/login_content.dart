@@ -24,7 +24,7 @@ class _LoginContentState extends State<LoginContent> {
     'email-already-in-use',
     'invalid-email',
   ];
-  bool checkBoxAction = false;
+  bool checkBoxValue = false;
   String? emailErrorText;
 
   @override
@@ -75,7 +75,7 @@ class _LoginContentState extends State<LoginContent> {
             ),
           LoginBottomLine(
             changeValue: changeValue,
-            checkBoxAction: checkBoxAction,
+            checkBoxAction: checkBoxValue,
             login: widget.isLogin,
           ),
           LoginButton(
@@ -83,6 +83,7 @@ class _LoginContentState extends State<LoginContent> {
             passwordController: passwordController,
             confirmPasswordController: confirmPasswordController,
             isLogin: widget.isLogin,
+            checkBoxValue: checkBoxValue,
             warningsCode: warningsCode,
           ),
         ],
@@ -92,7 +93,7 @@ class _LoginContentState extends State<LoginContent> {
 
   void changeValue() {
     setState(() {
-      checkBoxAction = !checkBoxAction;
+      checkBoxValue = !checkBoxValue;
     });
   }
 

@@ -11,6 +11,7 @@ class LoginButton extends StatelessWidget {
   final TextEditingController passwordController;
   final TextEditingController confirmPasswordController;
   final bool isLogin;
+  final bool checkBoxValue;
   final List<String> warningsCode;
 
   const LoginButton({
@@ -19,6 +20,7 @@ class LoginButton extends StatelessWidget {
     required this.passwordController,
     required this.confirmPasswordController,
     required this.isLogin,
+    required this.checkBoxValue,
     required this.warningsCode,
   });
 
@@ -77,6 +79,7 @@ class LoginButton extends StatelessWidget {
       );
       return;
     }
+    context.read<StatusProvider>().login(checkBoxValue);
     if (context.mounted) context.go('/');
   }
 
@@ -115,7 +118,7 @@ class LoginButton extends StatelessWidget {
       );
       return;
     }
-    context.read<StatusProvider>().login();
+    context.read<StatusProvider>().login(false);
     if (context.mounted) context.go('/');
   }
 

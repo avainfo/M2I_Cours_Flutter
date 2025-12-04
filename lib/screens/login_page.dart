@@ -3,10 +3,9 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:m2i_cours_flutter/data/providers/status_provider.dart';
 import 'package:m2i_cours_flutter/widgets/common/windows_bar.dart';
 import 'package:m2i_cours_flutter/widgets/login_page/login_panel.dart';
-import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,9 +18,15 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    if (context.read<StatusProvider>().isLoggedIn) {
-      context.go("/");
-    }
+
+    SharedPreferences.getInstance().then(
+      (instance) {
+        if (instance.getBool("isLoggedIn") != null &&
+            instance.getBool("isLoggedIn")!) {
+          if (context.mounted) context.go("/");
+        }
+      },
+    );
   }
 
   @override
