@@ -55,6 +55,9 @@ class LoginInput extends StatelessWidget {
                 ),
               ),
               controller: controller,
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
         ),
